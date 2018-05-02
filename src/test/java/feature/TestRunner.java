@@ -4,11 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.intuit.karate.cucumber.CucumberRunner;
 import com.intuit.karate.cucumber.KarateStats;
@@ -26,6 +23,7 @@ import net.masterthought.cucumber.ReportBuilder;
 public class TestRunner {
 
 	static Logger logger = LoggerFactory.getLogger(TestRunner.class);
+	static Environment env = new Environment();
 
 	// We should probably use a logback.xml here
 	//static {
@@ -40,7 +38,7 @@ public class TestRunner {
 
 	@Test
 	public void testParallel() {
-		KarateStats stats = CucumberRunner.parallel(getClass(), Environment.KARATE_THREAD_COUNT, "target/surefire-reports");
+		KarateStats stats = CucumberRunner.parallel(getClass(), env.karateThreadCount(), "target/surefire-reports");
 		generateReport("target/surefire-reports");
 		assertTrue("there are scenario failures", stats.getFailCount() == 0);
 	}
@@ -49,9 +47,9 @@ public class TestRunner {
 		Collection<File> jsonFiles = FileUtils.listFiles(new File(karateOutputPath), new String[] { "json" }, true);
 		List<String> jsonPaths = new ArrayList<>(jsonFiles.size());
 		jsonFiles.forEach(file -> jsonPaths.add(file.getAbsolutePath()));
-		Configuration config = new Configuration(new File(Environment.KARATE_REPORT_PATH), Environment.KARATE_PROJECT_NAME);
+		Configuration config = new Configuration(new File(env.karateReportPath()), env.karateProjectName());
 		ReportBuilder reportBuilder = new ReportBuilder(jsonPaths, config);
-		logger.info("Generating report in: " + Environment.KARATE_REPORT_PATH);
+		logger.info("Generating report in: " + env.karateReportPath());
 		reportBuilder.generateReports();
 	}
 }
