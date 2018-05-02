@@ -25,6 +25,11 @@ public class TestRunner {
 	static Logger logger = LoggerFactory.getLogger(TestRunner.class);
 	static Environment env = new Environment();
 
+	static {
+		// debug
+		logger.info(env.toString());
+	}
+
 	// We should probably use a logback.xml here
 	//static {
 	//	Set<String> loggers = new HashSet<>(Arrays.asList("org.apache.http", "groovyx.net.http"));
@@ -49,7 +54,6 @@ public class TestRunner {
 		jsonFiles.forEach(file -> jsonPaths.add(file.getAbsolutePath()));
 		Configuration config = new Configuration(new File(env.karateReportPath()), env.karateProjectName());
 		ReportBuilder reportBuilder = new ReportBuilder(jsonPaths, config);
-		logger.info("Generating report in: " + env.karateReportPath());
 		reportBuilder.generateReports();
 	}
 }

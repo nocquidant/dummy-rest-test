@@ -41,4 +41,15 @@ public class Environment {
 		}
 		return KARATE_PROJECT_NAME_DEFAULT;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("Environment object: " + //
+				"karate.thread.count=%d, " + //
+				"karate.report.path=%s, " + //
+				"karate.project.name=%s", //
+				karateThreadCount(), //
+				karateReportPath(), //
+				karateProjectName());
+	}
 }
