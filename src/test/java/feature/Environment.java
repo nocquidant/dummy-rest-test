@@ -9,7 +9,7 @@ public class Environment {
 		if (arg == null) {
 			return false;
 		}
-		return arg.isEmpty();
+		return !arg.isEmpty();
 	}
 
 	public Integer karateThreadCount() {
