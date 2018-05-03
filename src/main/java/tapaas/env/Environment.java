@@ -1,4 +1,4 @@
-package feature;
+package tapaas.env;
 
 public class Environment {
 	private static Integer KARATE_THREAD_COUNT_DEFAULT = 1;
@@ -20,6 +20,11 @@ public class Environment {
 			return Integer.parseInt(System.getProperty("karate.thread.count"));
 		}
 		return KARATE_THREAD_COUNT_DEFAULT;
+	}
+
+	public String karateOutputPath() {
+		// TODO
+		return "target/surefire-reports";
 	}
 
 	public String karateReportPath() {
