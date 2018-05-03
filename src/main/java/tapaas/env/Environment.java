@@ -49,10 +49,10 @@ public class Environment {
 
 	@Override
 	public String toString() {
-		return String.format("Environment object: " + //
-				"karate.thread.count=%d, " + //
-				"karate.report.path=%s, " + //
-				"karate.project.name=%s", //
+		return String.format("Environment object[" + //
+				"karate.thread.count=%d," + //
+				"karate.report.path=%s," + //
+				"karate.project.name=%s]", //
 				karateThreadCount(), //
 				karateReportPath(), //
 				karateProjectName());
